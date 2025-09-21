@@ -1,4 +1,4 @@
-# Reporter Module
+# Reporter
 
 *A Roblox anti-cheat reporting system to track, record, and analyze player movements. **Also includes full history of all past reports on a player.***
 
@@ -18,7 +18,7 @@ The module uses **two Datastores**: `ReportStores` and `ReportHistory`.
 - **ReportStores:** An unordered DataStore storing all reports. The key is the **unique report ID**.
 - **ReportHistory:** Stores each player’s report history. The key format is `"Player_"..Player.UserId`.
 
-It's also noted that the module that is being showcased is also paired with a Anticheat Implementation **(BasicAnticheatInit.luau)** that is not required to have but is also used to showcase how to use Reporter **(ReporterInit.luau)** is supposed to be use.
+It's also noted that the module being showcased is also paired with an Anticheat Implementation **(BasicAnticheatInit.luau)** that is not required to have but is also used to showcase how to use Reporter in the average Anticheat module **(ReporterInit.luau)**
 
 ### Report Structure
 
