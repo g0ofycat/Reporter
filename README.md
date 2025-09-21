@@ -18,6 +18,8 @@ The module uses **two Datastores**: `ReportStores` and `ReportHistory`.
 - **ReportStores:** An unordered DataStore storing all reports. The key is the **unique report ID**.
 - **ReportHistory:** Stores each player’s report history. The key format is `"Player_"..Player.UserId`.
 
+It's also noted that the module that is being showcased is also paired with a Anticheat Implementation **(BasicAnticheatInit.luau)** that is not required to have but is also used to showcase how to use Reporter **(ReporterInit.luau)** is supposed to be use.
+
 ### Report Structure
 
 ```lua
@@ -38,13 +40,13 @@ local reportData = {
 	PlayerName = Player.Name, -- The player's name of the person suspected of exploiting
 	Reason = Reason, -- The reason they were reported
 	MovementKey = movementKey, -- Encoded string that is used to replay the player's movement
-	Score = score, -- The score is calculated by how young the players account is and how many mutual friends they have. It's a common trend between exploiters I found when making this module. Check FriendCheckerInit.lua for more information. This doesn't have a part in actually detecting the cheater though, use this if you want to sort players based on how likely they are.
+	Score = score, -- The score is calculated by how young the players account is and how many mutual friends they have. It's a common trend between exploiters I found when making this module. Check FriendCheckerInit.luau for more information. This doesn't have a part in actually detecting the cheater though, use this if you want to sort players based on how likely they are.
 	Timestamp = tick(), -- When the player was reported
 	RecordTime = recordTimeNum -- How long the suspected exploiter was recorded for
 } :: ReportData
 ```
 
-*Each API function is fully documented within ReporterInit.lua for easy reference.*
+*Each API function is fully documented within ReporterInit.luau for easy reference.*
 
 **NOTE:** In the Replayer configuration, you should **update the references to the Rig Folder to point to your actual Rig Folder** instead of workspace.
 
@@ -173,17 +175,21 @@ end
 
 ```lua
 local Players = game:GetService("Players")
+
+local BasicAnticheat = require(game.ReplicatedStorage.Anticheat.BasicAnticheat.BasicAnticheatInit)
 local Reporter = require(game.ReplicatedStorage.Anticheat.Reporter.ReporterInit)
 
+BasicAnticheat.Init() -- // Optional, Anticheat Implementation with Reporter
+
 Players.PlayerAdded:Connect(function(Player)
-    Player.CharacterAdded:Wait()
-
-    local REPORT_ID = "ID HERE"
-
-    local report = Reporter.GetReport(REPORT_ID) -- // Prints 'ReportData'
-    
-    if report then
-        Reporter.Replay(report.MovementKey) -- // Replays the Rig Movement
-    end
+	Player.CharacterAdded:Wait()
+	
+	local REPORT_ID = "ID HERE" -- // 'Report ID' Here
+	
+	local Report = Reporter.GetReport(REPORT_ID) -- // Returns ReportData?
+	
+	print(Report)
+	
+	Reporter.Replay(Report.MovementKey)
 end)
 ```
