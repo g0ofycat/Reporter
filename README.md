@@ -38,7 +38,7 @@ local reportData = {
 	PlayerName = Player.Name, -- The player's name of the person suspected of exploiting
 	Reason = Reason, -- The reason they were reported
 	MovementKey = movementKey, -- Encoded string that is used to replay the player's movement
-	Score = score, -- The score is calculated by how young the players account is and how many mutual friends they have. It's a common trend between exploiters I found when making this module. Check FriendCheckerInit.lua for more information. This doesn't have a part in actually detecting the cheater though, use this if you want to sort players based on low likely they are.
+	Score = score, -- The score is calculated by how young the players account is and how many mutual friends they have. It's a common trend between exploiters I found when making this module. Check FriendCheckerInit.lua for more information. This doesn't have a part in actually detecting the cheater though, use this if you want to sort players based on how likely they are.
 	Timestamp = tick(), -- When the player was reported
 	RecordTime = recordTimeNum -- How long the suspected exploiter was recorded for
 } :: ReportData
