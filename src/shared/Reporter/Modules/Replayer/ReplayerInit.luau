@@ -43,6 +43,8 @@ local function Round(number: number, decimals: number?): number
 end
 
 -- CompressRotation(): Compress rotation to smaller range if possible
+-- @param degrees: The degree to compress
+-- @return: The compressed degree
 local function CompressRotation(degrees: number): number
 	while degrees > 180 do
 		degrees -= 360
