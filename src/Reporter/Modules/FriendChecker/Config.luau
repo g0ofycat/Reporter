@@ -1,3 +1,5 @@
+--!strict
+
 local Config = {}
 
 Config.ANTI_CHEAT = {

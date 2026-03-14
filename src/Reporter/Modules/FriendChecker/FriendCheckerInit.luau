@@ -72,7 +72,7 @@ end
 -- @return number: (Points) - How likely the player is to be an exploiter, decreased by higher account ages
 function FriendChecker.Scan(player: Player): number
 	local PlayerPoints = 0
-	
+
 	local ANTI_CHEAT = FriendChecker.Modules.Config.ANTI_CHEAT
 
 	if player.AccountAge < ANTI_CHEAT.AGE_LIMIT then

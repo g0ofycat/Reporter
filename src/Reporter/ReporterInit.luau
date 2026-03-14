@@ -202,7 +202,7 @@ function Reporter.Report(Player: Player, RecordTime: number, Reason: string): (s
 	end
 
 	local reportId = GenerateReportId()
-	
+
 	AddToActiveReports(Player, reportId)
 
 	task.spawn(function()
@@ -265,10 +265,10 @@ function Reporter.DeleteReport(reportId: string, userId: number?): boolean
 	end)
 
 	local successHistory = true
-	
+
 	if userId then
 		local key = "Player_" .. userId
-		
+
 		local success, result = pcall(function()
 			return ReportHistory:UpdateAsync(key, function(oldHistory)
 				if not oldHistory then return {} end
@@ -281,9 +281,9 @@ function Reporter.DeleteReport(reportId: string, userId: number?): boolean
 				return oldHistory
 			end)
 		end)
-		
+
 		successHistory = success
-		
+
 		if not success then
 			warn("Reporter.DeleteReport(): Failed to update player history - " .. tostring(result))
 		end
@@ -292,7 +292,7 @@ function Reporter.DeleteReport(reportId: string, userId: number?): boolean
 	if not successMain then
 		warn("Reporter.DeleteReport(): Failed to delete report from main store - " .. tostring(errMain))
 	end
-	
+
 	if userId and not successHistory then
 		warn("Reporter.DeleteReport(): Failed to delete report from player history")
 	end
@@ -368,7 +368,7 @@ end
 -- @return { ActiveReportInfo }: Table of active reports with player information
 function Reporter.GetActiveReports(): { ActiveReportInfo }
 	local reports = {}
-	
+
 	for userId, reportData in Reporter.ActiveReports do
 		table.insert(reports, {
 			UserId = userId,
@@ -378,7 +378,7 @@ function Reporter.GetActiveReports(): { ActiveReportInfo }
 			Duration = tick() - reportData.StartTime
 		})
 	end
-	
+
 	return reports
 end
 

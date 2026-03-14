@@ -227,13 +227,13 @@ function Bitpacker.Pack(data: Types.PackableTable): string
 	local offset = 0
 
 	local fieldCount = 0
-	
+
 	for _ in data do
 		fieldCount += 1
 	end
 
 	buffer.writeu16(buf, offset, fieldCount)
-	
+
 	offset += 2
 
 	for key, value in data do
@@ -279,7 +279,7 @@ end
 -- @return number: The amount of bytes
 function Bitpacker.GetCurrentSize(data: Types.PackableTable): number
 	local total = 0
-	
+
 	for k, v in data do
 		total += GetRawSize(k)
 		total += GetRawSize(v)

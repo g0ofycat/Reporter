@@ -86,7 +86,7 @@ local function recordViolation(player: Player, reason: string): ()
 
 	if playerData then
 		local now = tick()
-	
+
 		if now - playerData.lastReport >= Config.ANTI_CHEAT.REPORT_COOLDOWN and BasicAnticheat.ViolationCounts[player.UserId] < Config.ANTI_CHEAT.VIOLATION_LIMIT then
 			warn(string.format("Now Reporting %s for %s", player.Name, reason))
 			Reporter.Report(player, Config.ANTI_CHEAT.RECORD_TIME, reason)
@@ -104,7 +104,7 @@ local function recordViolation(player: Player, reason: string): ()
 			local success, err = pcall(function()
 				return Players:BanAsync(config)
 			end)
-			
+
 			if success then
 				print(`recordViolation(): {player.UserId} has been banned.`)
 			else
@@ -131,7 +131,7 @@ local function monitorPlayer(player: Player): ()
 		lastReport = 0,
 		heartbeat = nil :: any,
 	}
-	
+
 	BasicAnticheat.PlayerData[player.UserId] = data
 
 	data.heartbeat = RunService.Heartbeat:Connect(function()

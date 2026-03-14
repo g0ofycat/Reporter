@@ -49,11 +49,11 @@ local function CompressRotation(degrees: number): number
 	while degrees > 180 do
 		degrees -= 360
 	end
-	
+
 	while degrees < -180 do
 		degrees += 360
 	end
-	
+
 	return Round(degrees, Replayer.Modules.Config.Compression.ROTATION_PRECISION)
 end
 
@@ -192,10 +192,10 @@ local function CreateRigMovement(UserId: number, cframes: {CFrame}, playbackRate
 	local success, description = pcall(function()
 		return Replayer.Services.Players:GetHumanoidDescriptionFromUserId(UserId)
 	end)
-	
+
 	Rig.Name = Player and Player.DisplayName or ("Rig_" .. UserId)
 	Rig.Parent = Replayer.Modules.Config.Instances.RIG_FOLDER
-	
+
 	if success and description then
 		Humanoid:ApplyDescription(description)
 	end
@@ -240,7 +240,7 @@ end
 function Replayer.StartRecording(character: Model, recordRate: number): RBXScriptConnection
 	assert(character, "character cannot be nil")
 	assert(recordRate, "recordRate cannot be nil")
-	
+
 	local Player = Replayer.Services.Players:GetPlayerFromCharacter(character)
 	local HumanoidRootPart = character:WaitForChild("HumanoidRootPart") :: BasePart
 
@@ -250,7 +250,7 @@ function Replayer.StartRecording(character: Model, recordRate: number): RBXScrip
 		LastCFrame = nil,
 		UserId = Player.UserId
 	}
-	
+
 	Replayer.Connections[character] = Replayer.Services.RunService.Heartbeat:Connect(function()
 		local nowTime = os.clock()
 		local data = Replayer.Data[character]
